@@ -1,3 +1,3 @@
 class Globals {
-  static const String socketURL = 'ws://localhost:3000';
+  static const String socketURL = 'ws://154.49.136.51:3000';
 }
