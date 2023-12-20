@@ -6,7 +6,11 @@ import { Message } from "./model/message";
 
 const app: Express = express();
 const http = createServer(app);
-const io = new Server(http);
+const io = new Server(http, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }});
 
 const rooms = [];
 

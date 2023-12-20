@@ -8,7 +8,12 @@ const socket_io_1 = require("socket.io");
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 const http = (0, http_1.createServer)(app);
-const io = new socket_io_1.Server(http);
+const io = new socket_io_1.Server(http, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
 const rooms = [];
 app.use(express_1.default.static('public'));
 io.use((socket, next) => {
