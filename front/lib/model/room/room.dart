@@ -16,7 +16,8 @@ sealed class Room with _$Room {
     required String id,
     required String name,
     required List<Message> messages,
-    @Default(true) bool hasNewMessages,
+    @Default(false) bool hasNewMessages,
+    @Default(true) bool online,
   }) = _Room;
 
   factory Room.fromJson(Map<String, dynamic> json) => _$RoomFromJson(json);

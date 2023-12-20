@@ -28,6 +28,8 @@ mixin _$Room {
   set messages(List<Message> value) => throw _privateConstructorUsedError;
   bool get hasNewMessages => throw _privateConstructorUsedError;
   set hasNewMessages(bool value) => throw _privateConstructorUsedError;
+  bool get online => throw _privateConstructorUsedError;
+  set online(bool value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RoomCopyWith<Room> get copyWith => throw _privateConstructorUsedError;
@@ -39,7 +41,11 @@ abstract class $RoomCopyWith<$Res> {
       _$RoomCopyWithImpl<$Res, Room>;
   @useResult
   $Res call(
-      {String id, String name, List<Message> messages, bool hasNewMessages});
+      {String id,
+      String name,
+      List<Message> messages,
+      bool hasNewMessages,
+      bool online});
 }
 
 /// @nodoc
@@ -59,6 +65,7 @@ class _$RoomCopyWithImpl<$Res, $Val extends Room>
     Object? name = null,
     Object? messages = null,
     Object? hasNewMessages = null,
+    Object? online = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -77,6 +84,10 @@ class _$RoomCopyWithImpl<$Res, $Val extends Room>
           ? _value.hasNewMessages
           : hasNewMessages // ignore: cast_nullable_to_non_nullable
               as bool,
+      online: null == online
+          ? _value.online
+          : online // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -89,7 +100,11 @@ abstract class _$$RoomImplCopyWith<$Res> implements $RoomCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id, String name, List<Message> messages, bool hasNewMessages});
+      {String id,
+      String name,
+      List<Message> messages,
+      bool hasNewMessages,
+      bool online});
 }
 
 /// @nodoc
@@ -106,6 +121,7 @@ class __$$RoomImplCopyWithImpl<$Res>
     Object? name = null,
     Object? messages = null,
     Object? hasNewMessages = null,
+    Object? online = null,
   }) {
     return _then(_$RoomImpl(
       id: null == id
@@ -124,6 +140,10 @@ class __$$RoomImplCopyWithImpl<$Res>
           ? _value.hasNewMessages
           : hasNewMessages // ignore: cast_nullable_to_non_nullable
               as bool,
+      online: null == online
+          ? _value.online
+          : online // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -135,7 +155,8 @@ class _$RoomImpl extends _Room {
       {required this.id,
       required this.name,
       required this.messages,
-      this.hasNewMessages = true})
+      this.hasNewMessages = false,
+      this.online = true})
       : super._();
 
   factory _$RoomImpl.fromJson(Map<String, dynamic> json) =>
@@ -150,10 +171,13 @@ class _$RoomImpl extends _Room {
   @override
   @JsonKey()
   bool hasNewMessages;
+  @override
+  @JsonKey()
+  bool online;
 
   @override
   String toString() {
-    return 'Room(id: $id, name: $name, messages: $messages, hasNewMessages: $hasNewMessages)';
+    return 'Room(id: $id, name: $name, messages: $messages, hasNewMessages: $hasNewMessages, online: $online)';
   }
 
   @JsonKey(ignore: true)
@@ -168,7 +192,8 @@ abstract class _Room extends Room {
       {required String id,
       required String name,
       required List<Message> messages,
-      bool hasNewMessages}) = _$RoomImpl;
+      bool hasNewMessages,
+      bool online}) = _$RoomImpl;
   _Room._() : super._();
 
   factory _Room.fromJson(Map<String, dynamic> json) = _$RoomImpl.fromJson;
@@ -185,6 +210,9 @@ abstract class _Room extends Room {
   @override
   bool get hasNewMessages;
   set hasNewMessages(bool value);
+  @override
+  bool get online;
+  set online(bool value);
   @override
   @JsonKey(ignore: true)
   _$$RoomImplCopyWith<_$RoomImpl> get copyWith =>

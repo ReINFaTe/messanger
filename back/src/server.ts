@@ -26,18 +26,21 @@ io.on('connection', (socket: Socket) => {
 
   const users = [];
   for (let [id, otherSocket] of io.of("/").sockets) {
-    if (id !== socket.id) {
-      users.push({
-        id: id,
-        name: otherSocket.username,
-        messages: [],
-      });
-    }
+    users.push({
+      id: id,
+      name: otherSocket.username,
+      messages: [],
+    });
   }
-  io.emit("rooms", users);
+  socket.emit("rooms", users);
+  socket.broadcast.emit('user connected', {
+    id: socket.id,
+    name: socket.username,
+    messages: [],
+  })
 
   socket.on('disconnect', () => {
-      console.log('A user disconnected');
+      socket.broadcast.emit('user disconnected', socket.id);
   });
   socket.on('chat message', ({to, text}) => {
       console.log('message: ' + text);
@@ -45,7 +48,6 @@ io.on('connection', (socket: Socket) => {
         text: text,
         username: socket.username,
         userId: socket.id,
-
       });
   });
 });

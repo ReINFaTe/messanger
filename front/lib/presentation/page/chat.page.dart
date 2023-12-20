@@ -91,6 +91,7 @@ class _ChatPageState extends State<ChatPage> {
                       children: [
                         Expanded(
                           child: TextFormField(
+                            enabled: room.online,
                             keyboardType: TextInputType.text,
                             maxLines: null,
                             autofocus: true,
@@ -107,7 +108,7 @@ class _ChatPageState extends State<ChatPage> {
                           ),
                         ),
                         TextButton(
-                          onPressed: _submitMessage,
+                          onPressed: room.online ? _submitMessage : null,
                           child: const Text('Send'),
                         ),
                       ],

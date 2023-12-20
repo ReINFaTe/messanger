@@ -51,7 +51,16 @@ class _RoomsPageState extends State<RoomsPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(room.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.titleMedium),
+                          Row(
+                            children: [
+                              Text(room.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.titleMedium),
+                              const Spacer(),
+                              Text(room.online ? 'Online' : 'Offline', maxLines: 1, overflow: TextOverflow.ellipsis, style:
+                                Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  color: room.online ? Colors.blue : Colors.blueGrey
+                                )),
+                            ],
+                          ),
                           Text(lastMessage != null ? lastMessage.text : '', maxLines: 1, overflow: TextOverflow.ellipsis),
                         ],
                       ),

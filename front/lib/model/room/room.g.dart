@@ -12,5 +12,6 @@ _$RoomImpl _$$RoomImplFromJson(Map<String, dynamic> json) => _$RoomImpl(
       messages: (json['messages'] as List<dynamic>)
           .map((e) => Message.fromJson(e as Map<String, dynamic>))
           .toList(),
-      hasNewMessages: json['hasNewMessages'] as bool? ?? true,
+      hasNewMessages: json['hasNewMessages'] as bool? ?? false,
+      online: json['online'] as bool? ?? true,
     );

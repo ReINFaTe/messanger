@@ -23,17 +23,20 @@ io.on('connection', (socket) => {
     console.log('A user connected');
     const users = [];
     for (let [id, otherSocket] of io.of("/").sockets) {
-        if (id !== socket.id) {
-            users.push({
-                id: id,
-                name: otherSocket.username,
-                messages: [],
-            });
-        }
+        users.push({
+            id: id,
+            name: otherSocket.username,
+            messages: [],
+        });
     }
-    io.emit("rooms", users);
+    socket.emit("rooms", users);
+    socket.broadcast.emit('user connected', {
+        id: socket.id,
+        name: socket.username,
+        messages: [],
+    });
     socket.on('disconnect', () => {
-        console.log('A user disconnected');
+        socket.broadcast.emit('user disconnected', socket.id);
     });
     socket.on('chat message', ({ to, text }) => {
         console.log('message: ' + text);
